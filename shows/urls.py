@@ -7,4 +7,6 @@ urlpatterns = [
     path('initialize/', views.make_data, name="make_data"),
     path('new_show/', views.new_show),
     path('create_show/', views.create_show),
+    path('create_show/checkEmail/',views.checkEmail),
+    path('show/<int:id>/',views.show_show),
 ]

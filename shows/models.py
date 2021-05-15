@@ -55,11 +55,22 @@ class ShowsManager(models.Manager):
 
         return errors
 
+    def checkEmail(self, email):
+        errors  = {}
+        EMAIL_REGEX = re.compile(r'^[A-Za-z0-9.+_-]+@[A-Za-z0-9.+_-]+\.[A-Za-z]+$')
+        if not EMAIL_REGEX.match(email):
+            errors['email'] = 'Correo Inválido'
+        return errors
+
+
 class Shows(models.Model):
     title       = models.CharField(max_length=45)
     network     = models.CharField(max_length=45)
+    email       = models.CharField(max_length=100)
     release_date= models.DateField()
     description  = models.CharField(max_length=255)
+    created_at  = models.DateTimeField(auto_now_add=True) 
+    updated_at  = models.DateTimeField(auto_now=True)
     objects     = ShowsManager()
 
 

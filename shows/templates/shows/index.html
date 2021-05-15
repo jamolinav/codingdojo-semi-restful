@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    
-    <link rel="stylesheet" href="{% static 'shows/MDB5-STANDARD-UI-KIT-Free-3/css/mdb.min.css' %}">
-    <script src="{% static 'shows/MDB5-STANDARD-UI-KIT-Free-3/js/mdb.min.js' %}"></script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    
-    <link rel="stylesheet" href="{% static 'shows/css/styles.css' %}">
-    <script src="{% static 'shows/js/functions.js' %}"></script>
+{% extends 'shows/base.html' %}
 
+{% block head %}
+    <title>Shows</title>
+{% endblock %}
 
-    <title>Document</title>
-</head>
-<body>
-    <div class="wrapper">
-        <h1 class="d-flex justify-content-center page-title">All Shows</h1>
+{% block header%}
+    <h1 class="d-flex justify-content-center page-title">All Shows</h1>
+{% endblock %}
+
+{% block content %}        
         <div class="tableFixHead table-wrapper">
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
@@ -41,7 +28,7 @@
                     <td>{{show.network}}</td>
                     <td>{{show.release_date}}</td>
                     <td>
-                        <a href="#">Show | </a>
+                        <a href="/shows/show/{{show.id}}">Show | </a>
                         <a href="#">Edit | </a>
                         <a href="#">Delete</a>
                     </td>
@@ -53,7 +40,5 @@
             <br>
             <a href="/shows/create_show">Create Show</a>
         </div>
-        
-    </div>
-</body>
-</html>
+
+{% endblock %}

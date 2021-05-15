@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="{% static 'shows/js/functions.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'shows/css/styles.css' %}">
-    <title>Create</title>
-</head>
-<body class="login-body">
-    <div class="wrapper">
+{% extends 'shows/base.html' %}
+
+{% block head %}
+    <title>Shows</title>
+{% endblock %}
+
+{% block header%}
+    <h1 class="d-flex justify-content-center page-title">New Show</h1>
+{% endblock %}
+
+{% block content %} 
+
         <a class="go-back" href="/shows">Go Back</a>
         <div class="windows-form">
             <div class="title-form">Add a New Show</div>
@@ -24,6 +21,9 @@
                     </div>
                     <div class="field-form">
                         <p>Network:</p><input type="text" name="network" value="{{new_show.network}}"/>
+                    </div>
+                    <div class="field-form">
+                        <p>Email:</p><input type="text" name="email" id="email" value="{{new_show.email}}"/>
                     </div>
                     <div class="field-form">
                         <p>Release Date:</p><input type="date" name="release_date" value="{{new_show.release_date}}" id="release_date"/>
@@ -39,7 +39,7 @@
             </div>
             <footer class="form-footer">
                 {% if messages %}
-                    <ul class="messages">
+                    <ul class="messages" id="messages">
                         {% for message in messages %}
                         <li>{{message}}</li>
                         {% endfor %}
@@ -47,6 +47,7 @@
                 {% endif %}
             </footer>
         </div>
-    </div>
-</body>
-</html>
+
+{% endblock %}
+
+    

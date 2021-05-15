@@ -1,0 +1,48 @@
+{% extends 'shows/base.html' %}
+
+{% block head %}
+    <title>Shows</title>
+{% endblock %}
+
+{% block header%}
+    <h1 class="d-flex justify-content-center page-title">Show Show</h1>
+{% endblock %}
+
+{% block content %}
+
+{% load tz %}
+
+        <a class="go-back" href="/shows">Go Back</a>
+        <div class="windows-form">
+            <div class="title-form">TV Show {{ show.id }}</div>
+            <div class="container-form">
+                <br>
+                <div class="field-form">
+                    <p>Title: {{show.title}}</p>
+                </div>
+                <div class="field-form">
+                    <p>Network: {{show.network}}</p>
+                </div>
+                <div class="field-form">
+                    <p>Email: {{show.email}}</p>
+                </div>
+                <div class="field-form">
+                    <p>Release Date: {{show.release_date}}</p>
+                </div>
+                <div class="field-form">
+                    <p>Description: {{show.description}}</p>
+                </div>
+                <br>
+                <br>
+                <div class="field-form">
+                    {% timezone "America/Santiago" %}
+                    <p>Last Updated: {{show.updated_at}}</p>
+                    {% endtimezone %}
+                </div>
+            </div>
+            
+        </div>
+
+{% endblock %}
+
+    

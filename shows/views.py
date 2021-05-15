@@ -2,7 +2,19 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from shows.models import *
 from . import show_maker
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+
+def digito_verificador(rut):
+    reversed_digits = map(int, reversed(str(rut)))
+    factors = cycle(range(2, 8))
+    s = sum(d * f for d, f in zip(reversed_digits, factors))
+    return (-s) % 11
+    
+def checkEmail(request):
+    print(request.POST)
+    errors = Shows.objects.checkEmail(request.POST['email'])
+    print('errors: ',errors)
+    return JsonResponse({'errors' : errors})
 
 def okay(request):
     return HttpResponse('pretend-binary-data-here', content_type='image/jpeg')
@@ -17,6 +29,13 @@ def index(request):
 
 def new_show(request):
     return render(request, 'shows/new_show.html')
+
+def show_show(request, id):
+    show = Shows.objects.filter(id=id)
+    context = {
+        'show' : show[0]
+    }
+    return render(request, 'shows/show_show.html', context)
 
 def create_show(request):
     if request.method == 'GET':
