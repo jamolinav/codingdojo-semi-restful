@@ -9,6 +9,13 @@
 {% endblock %}
 
 {% block content %}        
+        {% if messages %}
+        <ul class="messages" id="messages">
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="tableFixHead table-wrapper">
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
@@ -29,8 +36,8 @@
                     <td>{{show.release_date}}</td>
                     <td>
                         <a href="/shows/show/{{show.id}}">Show | </a>
-                        <a href="#">Edit | </a>
-                        <a href="#">Delete</a>
+                        <a href="/shows/edit/{{show.id}}">Edit | </a>
+                        <a href="/shows/delete/{{show.id}}">Delete</a>
                     </td>
                     </tr>
                     {% empty %}

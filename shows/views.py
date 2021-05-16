@@ -19,9 +19,10 @@ def checkEmail(request):
 def okay(request):
     return HttpResponse('pretend-binary-data-here', content_type='image/jpeg')
 
-# Create your views here.
 def index(request):
-    #Shows.objects.all().delete()
+    return redirect('shows/')
+
+def shows(request):
     context = {
         'shows' : Shows.objects.all()
     }
@@ -33,9 +34,47 @@ def new_show(request):
 def show_show(request, id):
     show = Shows.objects.filter(id=id)
     context = {
-        'show' : show[0]
+        'show' : show[0] if len(show) > 0 else show
     }
     return render(request, 'shows/show_show.html', context)
+
+def edit_show(request, id):
+    show = Shows.objects.filter(id=id)
+    context = {
+        'show' : show[0] if len(show) > 0 else show
+    }
+    return render(request, 'shows/edit_show.html', context)
+
+def update_show(request, id):
+    if request.method == 'GET':
+        return render(request, 'shows/edit_show.html')
+    if request.method == 'POST':
+        errors = Shows.objects.validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            print(request.POST)
+            context = {
+                'show' : request.POST
+            }
+            return render(request, 'shows/edit_show.html', context)
+
+    Shows.objects.filter(id=id).update(title=request.POST['title'])
+    Shows.objects.filter(id=id).update(network=request.POST['network'])
+    Shows.objects.filter(id=id).update(email=request.POST['email'])
+    Shows.objects.filter(id=id).update(release_date=request.POST['release_date'])
+    Shows.objects.filter(id=id).update(description=request.POST['description'])
+    return redirect('/')
+
+def delete_show(request, id):
+    #Shows.objects.all().delete()
+    if request.method == 'GET':
+        delete = Shows.objects.filter(id=id).delete()
+        if delete[0] == 1:
+            messages.error(request, f'se elimino show {id}')
+        return redirect('/')
+    if request.method == 'POST':
+        return redirect('/')
 
 def create_show(request):
     if request.method == 'GET':
@@ -46,7 +85,6 @@ def create_show(request):
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
-            #for key, value in request.POST.items():
             print(request.POST)
             context = {
                 'new_show' : request.POST
