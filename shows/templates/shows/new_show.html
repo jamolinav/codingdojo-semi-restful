@@ -16,6 +16,7 @@
             <div class="container-form">
                 <form id="formRegister" action="/shows/create_show/" method="POST">
                     {% csrf_token %}
+                    <input type="hidden" name="id" value="0">
                     <div class="field-form">
                         <p>Title:</p><input type="text" name="title" value="{{new_show.title}}"/>
                     </div>

@@ -31,6 +31,7 @@ def checkDateField(field, value):
             print('fecha ingresada es menor')
         else:
             print('fecha ingresada es mayor o igual')
+            errors[field] = 'La fecha debe ser en el pasado'
     except ValueError:
         errors[field] = 'Formato de fecha incorrecta. Debe ser dd/mm/aaaa'
 
@@ -52,6 +53,12 @@ class ShowsManager(models.Manager):
         error_field = checkDateField(field_name,postData[field_name])
         if len(error_field) > 0:
             errors[field_name+'_format'] = error_field
+
+        if len(postData['description']) > 0 and len(postData['description']) < 10:
+            errors['description'] = 'Si ingresa descripcion debe ser de al menos 10 caracteres'
+
+        if Shows.objects.filter(title=postData['title']).exclude(id=postData['id']):
+            errors['title'] = 'Esta pelicula ya esta registrada'
 
         return errors
 

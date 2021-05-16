@@ -27,7 +27,9 @@
                     <p>Email: {{show.email}}</p>
                 </div>
                 <div class="field-form">
+                    {% timezone "America/Santiago" %}
                     <p>Release Date: {{show.release_date}}</p>
+                    {% endtimezone %}
                 </div>
                 <div class="field-form">
                     <p>Description: {{show.description}}</p>

@@ -40,6 +40,7 @@ def show_show(request, id):
 
 def edit_show(request, id):
     show = Shows.objects.filter(id=id)
+    print(show[0].release_date)
     context = {
         'show' : show[0] if len(show) > 0 else show
     }
