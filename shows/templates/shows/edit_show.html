@@ -11,7 +11,7 @@
 {% block content %} 
 
 {% load tz %}
-        <a class="go-back" href="/shows">Go Back</a>
+        <a class="go-back" href="{% url 'home' %}">Home</a>
         <div class="windows-form">
             <div class="title-form">Edit Show {{show.id}}</div>
             <div class="container-form">

@@ -11,42 +11,26 @@
 {% block content %} 
 
         <a class="go-back" href="/shows">Go Back</a>
-        <div class="windows-form">
-            <div class="title-form">Add a New Show</div>
-            <div class="container-form">
-                <form id="formRegister" action="/shows/create_show/" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="id" value="0">
-                    <div class="field-form">
-                        <p>Title:</p><input type="text" name="title" value="{{new_show.title}}"/>
-                    </div>
-                    <div class="field-form">
-                        <p>Network:</p><input type="text" name="network" value="{{new_show.network}}"/>
-                    </div>
-                    <div class="field-form">
-                        <p>Email:</p><input type="text" name="email" id="email" value="{{new_show.email}}"/>
-                    </div>
-                    <div class="field-form">
-                        <p>Release Date:</p><input type="date" name="release_date" value="{{new_show.release_date}}" id="release_date"/>
-                    </div>
-                    <div class="field-form">
-                        <p>Description:</p>
-                        <textarea name="description" id="" placeholder="<optional>">{{new_show.description}}</textarea>
-                    </div>
-                    <div class="form-buttons">
-                        <input type="submit" value="Create" />
-                    </div>
-                </form>
-            </div>
-            <footer class="form-footer">
-                {% if messages %}
-                    <ul class="messages" id="messages">
-                        {% for message in messages %}
-                        <li>{{message}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </footer>
+        <div class="tableFixHead table-wrapper">
+                <div class="title-form">Add a New Show</div>
+                <div class="container-form">
+                    <form id="formRegister" action="/shows/create_show/" method="POST">
+                        {% csrf_token %}
+                        <div class="django-form-wrapper">
+                            {{ show_form.as_p }}
+                        </div>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+                <footer class="form-footer">
+                    {% if messages %}
+                        <ul class="messages" id="messages">
+                            {% for message in messages %}
+                            <li>{{message}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </footer>
         </div>
 
 {% endblock %}

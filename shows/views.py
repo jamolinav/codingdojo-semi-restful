@@ -3,6 +3,7 @@ from django.contrib import messages
 from shows.models import *
 from . import show_maker
 from django.http import HttpResponse, JsonResponse
+from .forms.shows.show import ShowForm
 
 def digito_verificador(rut):
     reversed_digits = map(int, reversed(str(rut)))
@@ -79,7 +80,8 @@ def delete_show(request, id):
 
 def create_show(request):
     if request.method == 'GET':
-        return render(request, 'shows/new_show.html')
+        show_form = ShowForm() 
+        return render(request, 'shows/new_show.html', {'show_form' : show_form})
 
     if request.method == 'POST':
         errors = Shows.objects.validator(request.POST)
@@ -95,6 +97,9 @@ def create_show(request):
         print('POST: ',request.POST)
         # PASO TODAS LAS VALIDACIONES, SE CREA NUEVO REGISTRO
         Shows.objects.create(title=request.POST['title'], network=request.POST['network'], release_date=request.POST['release_date'], description=request.POST['description'])
+
+        show = ShowsForm(request.POST)
+
     return redirect('/')
 
 def make_data(request):

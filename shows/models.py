@@ -1,6 +1,7 @@
 from django.db import models
 import re
 from datetime import datetime, timedelta
+from django.core import validators
 
 def checkNameField(field, value):
     errors  = {}
@@ -73,7 +74,7 @@ class ShowsManager(models.Manager):
 class Shows(models.Model):
     title       = models.CharField(max_length=45)
     network     = models.CharField(max_length=45)
-    email       = models.CharField(max_length=100)
+    email       = models.EmailField(max_length=254, validators=[validators.EmailValidator(message='Correo no vválido')])
     release_date= models.DateField()
     description  = models.CharField(max_length=255)
     created_at  = models.DateTimeField(auto_now_add=True) 
