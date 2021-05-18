@@ -1,7 +1,10 @@
 from django.db import models
-import re
 from datetime import datetime, timedelta
 from django.core import validators
+from django.core.exceptions import ValidationError
+from django.contrib.auth.hashers import make_password, check_password
+import re
+import bcrypt
 
 def checkNameField(field, value):
     errors  = {}
@@ -75,10 +78,57 @@ class Shows(models.Model):
     title       = models.CharField(max_length=45)
     network     = models.CharField(max_length=45)
     email       = models.EmailField(max_length=254, validators=[validators.EmailValidator(message='Correo no vválido')])
+    #tipo        = models.PositiveSmallIntegerField(
+    #            validators
+    #)
     release_date= models.DateField()
     description  = models.CharField(max_length=255)
     created_at  = models.DateTimeField(auto_now_add=True) 
     updated_at  = models.DateTimeField(auto_now=True)
     objects     = ShowsManager()
 
+class UserManager(models.Manager):
+    def validator(self, postData):
+        errors  = {}
+        
+        errorsEmail = self.checkEmail(postData['email'])
+        if len(errorsEmail) > 0:
+            errors['email'] = errorsEmail
+
+        return errors
+    
+    def checkEmail(self, email):
+        errors  = {}
+        EMAIL_REGEX = re.compile(r'^[A-Za-z0-9.+_-]+@[A-Za-z0-9.+_-]+\.[A-Za-z]+$')
+        if not EMAIL_REGEX.match(email):
+            errors['email'] = 'Correo Inválido'
+        return errors
+
+class User(models.Model):
+    first_name      = models.CharField(max_length=45)
+    last_name       = models.CharField(max_length=45)
+    email           = models.CharField(max_length=100)
+    password        = models.CharField(max_length=254)
+    created_at      = models.DateTimeField(auto_now_add=True)
+    updated_at      = models.DateTimeField(auto_now=True)
+    objects         = UserManager()
+
+    def __str__(self):
+        return '%s the email' % self.email
+
+    def save(self, *args, **kwargs):
+        self.password = make_password(self.password)
+        super(User, self).save(*args, **kwargs)
+    
+    @staticmethod
+    def authenticate(email, password):
+        users    = User.objects.filter(email = email)
+        if len(users) > 0:
+            user = users[0]
+            bd_password = user.password
+            if check_password(password, bd_password):
+                return user
+        return None
+
+    
 

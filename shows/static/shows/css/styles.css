@@ -96,6 +96,8 @@ footer{
     height: auto;
     padding-top: 2%;
     padding-bottom: 2%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .field-form {
@@ -120,6 +122,7 @@ footer{
 
 #formRegister{
     height: auto;
+    width: -webkit-fill-available;
 }
 
 #formRegister button{
@@ -135,14 +138,16 @@ footer{
 }
 
 #formRegister input{
+    width: 200px;
     height: 20px;
-    width: 15%;
+    width: auto;
     margin-left: 2%;
     border-radius: 5px;
     border-color: #b0c4de61;
     font-family: Tahoma;
     font-size: 11px;
     color: steelblue;
+    padding: 0 20px
 }
 
 #formRegister label{

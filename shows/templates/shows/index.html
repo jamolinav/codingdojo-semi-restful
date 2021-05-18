@@ -35,9 +35,11 @@
                     <td>{{show.network}}</td>
                     <td>{{show.release_date}}</td>
                     <td>
-                        <a href="/shows/show/{{show.id}}">Show | </a>
-                        <a href="/shows/edit/{{show.id}}">Edit | </a>
+                        <a href="/shows/show/{{show.id}}">Show</a>
+                        {% if request.session.logged_user %}
+                        <a href="/shows/edit/{{show.id}}"> | Edit | </a>
                         <a href="/shows/delete/{{show.id}}">Delete</a>
+                        {% endif %}
                     </td>
                     </tr>
                     {% empty %}
@@ -45,7 +47,9 @@
                     {% endfor %}
             </table>
             <br>
+            {% if request.session.logged_user %}
             <a href="/shows/create_show">Create Show</a>
+            {% endif %}
         </div>
 
 {% endblock %}

@@ -14,16 +14,26 @@
         <div class="tableFixHead table-wrapper">
                 <div class="title-form">Add a New Show</div>
                 <div class="container-form">
-                    <form id="formRegister" action="/shows/create_show/" method="POST">
+                    <form id="formRegister" action="{% url 'register' %}" method="POST">
                         {% csrf_token %}
                         <div class="django-form-wrapper">
-                            {{ show_form.as_p }}
+                            {{ user_form.as_p }}
                             <br>
-                            <p><button type="submit">Add</button></p>
+                            <p><button type="submit">Register</button></p>
+                        </div>
+                        
+                    </form>
+                    <form id="formRegister" action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="django-form-wrapper">
+                            {{ user_login_form.as_p }}
+                            <br>
+                            <p><button type="submit">Login</button></p>
                         </div>
                         
                     </form>
                 </div>
+                
                 <footer class="form-footer">
                     {% if messages %}
                         <ul class="messages" id="messages">
