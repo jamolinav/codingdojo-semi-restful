@@ -145,6 +145,14 @@ def register(request):
             }
             return render(request, 'shows/register.html', context)
 
+        if User.ifExists(request.POST['email']):
+            messages.error(request, 'Usuario ya existe')
+            context = {
+                'user_form' : UserForm(request.POST),
+                'user_login_form' : UserLoginForm(),
+            }
+            return render(request, 'shows/register.html', context)
+
         user_form = UserForm(request.POST)
         if user_form.is_valid():
             user_form.save()
@@ -178,7 +186,7 @@ def login(request):
             'user_login_form' : user_login_form,
         }
         return render(request, 'shows/register.html', context)
-        
+
 def logout(request):
     try:
         del request.session['logged_user']

@@ -121,6 +121,14 @@ class User(models.Model):
         super(User, self).save(*args, **kwargs)
     
     @staticmethod
+    def ifExists(email):
+        users    = User.objects.filter(email = email)
+        if len(users) > 0:
+            return True
+        else:
+            return False
+
+    @staticmethod
     def authenticate(email, password):
         users    = User.objects.filter(email = email)
         if len(users) > 0:

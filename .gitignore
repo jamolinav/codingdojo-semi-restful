@@ -1,1 +1,3 @@
 djangoPyeEnv/**
+.DS_Store
+db.sqlite3

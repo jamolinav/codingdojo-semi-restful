@@ -12,8 +12,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     
-    <link rel="stylesheet" href="{% static 'shows/css/styles.css' %}">
-    <script src="{% static 'shows/js/functions.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'wall_app/css/styles.css' %}">
+    <script src="{% static 'wall_app/js/functions.js' %}"></script>
 
     {% block head %}
     {% endblock %}
@@ -26,9 +26,9 @@
         <div>
             {% if request.session.logged_user %}
                 <p class="login_username_p">Usuario: {{ request.session.logged_user }}</p>
-                <a class="login_register" href="/logout">Log Out</a>
+                <a class="login_register" href="{% url 'logout_wall_app' %}">Log Out</a>
             {% else %}
-                <a class="login_register" href="{% url 'register' %}">Login / Register</a>
+                <a class="login_register" href="{% url 'register_wall_app' %}">Login / Register</a>
             {% endif %}
         </div>
         {% block content %}

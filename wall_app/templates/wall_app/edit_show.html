@@ -1,0 +1,57 @@
+{% extends 'shows/base.html' %}
+
+{% block head %}
+    <title>Shows</title>
+{% endblock %}
+
+{% block header%}
+    <h1 class="d-flex justify-content-center page-title">Edit Show</h1>
+{% endblock %}
+
+{% block content %} 
+
+{% load tz %}
+        <a class="go-back" href="{% url 'home' %}">Home</a>
+        <div class="windows-form">
+            <div class="title-form">Edit Show {{show.id}}</div>
+            <div class="container-form">
+                <form id="formRegister" action="/shows/update/{{show.id}}/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{show.id}}">
+                    <div class="field-form">
+                        <p>Title:</p><input type="text" name="title" value="{{show.title}}"/>
+                    </div>
+                    <div class="field-form">
+                        <p>Network:</p><input type="text" name="network" value="{{show.network}}"/>
+                    </div>
+                    <div class="field-form">
+                        <p>Email:</p><input type="text" name="email" id="email" value="{{show.email}}"/>
+                    </div>
+                    <div class="field-form">
+                        <p>Release Date:</p><input type="date" name="release_date" value="{{show.release_date|date:'Y-m-d'}}" id="release_date"/>
+                    </div>
+                    <div class="field-form">
+                        <p>Description:</p>
+                        {% timezone "America/Santiago" %}
+                        <textarea name="description" id="" placeholder="<optional>">{{show.description}}</textarea>
+                        {% endtimezone %}
+                    </div>
+                    <div class="form-buttons">
+                        <input type="submit" value="Update" />
+                    </div>
+                </form>
+            </div>
+            <footer class="form-footer">
+                {% if messages %}
+                    <ul class="messages" id="messages">
+                        {% for message in messages %}
+                        <li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </footer>
+        </div>
+
+{% endblock %}
+
+    

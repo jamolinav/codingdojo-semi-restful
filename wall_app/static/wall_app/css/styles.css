@@ -9,12 +9,21 @@ th     { background:#eee; }
 #dtBasicExample th{
     background: linear-gradient(#2196f387, #2196f338, #00bcd400);
     height: 8%;
-    text-align: -webkit-center;
+    text-align: left;
     font-style: italic;
     padding-top: 8px;
     color: steelblue;
     font-weight: bold;
 }
+
+.comment_th{
+    color: white;
+    font-size: 12px;
+}
+.comment_p{
+    font-size: 12px;
+}
+
 a{
     font-size: 12px;
     margin-left: 5px;
@@ -134,12 +143,12 @@ footer{
     margin: 5px 5px;
 }
 
-#formRegister{
+.formRegister{
     height: auto;
     width: -webkit-fill-available;
 }
 
-#formRegister button{
+.formRegister button{
     width: 200px;
     height: 20px;
     width: 20%;
@@ -151,7 +160,7 @@ footer{
     color: steelblue;
 }
 
-#formRegister input{
+.formRegister input{
     width: 200px;
     height: 20px;
     width: auto;
@@ -164,7 +173,7 @@ footer{
     padding: 0 20px
 }
 
-#formRegister label{
+.formRegister label{
     color: gray;
     font-size: 12px;
     font-weight: bold;

@@ -1,0 +1,40 @@
+{% extends 'shows/base.html' %}
+
+{% block head %}
+    <title>Shows</title>
+{% endblock %}
+
+{% block header%}
+    <h1 class="d-flex justify-content-center page-title">New Show</h1>
+{% endblock %}
+
+{% block content %} 
+
+        <a class="go-back" href="/shows">Go Back</a>
+        <div class="tableFixHead table-wrapper">
+                <div class="title-form">Add a New Show</div>
+                <div class="container-form">
+                    <form id="formRegister" action="/shows/create_show/" method="POST">
+                        {% csrf_token %}
+                        <div class="django-form-wrapper">
+                            {{ show_form.as_p }}
+                            <br>
+                            <p><button type="submit">Add</button></p>
+                        </div>
+                        
+                    </form>
+                </div>
+                <footer class="form-footer">
+                    {% if messages %}
+                        <ul class="messages" id="messages">
+                            {% for message in messages %}
+                            <li>{{message}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </footer>
+        </div>
+
+{% endblock %}
+
+    
