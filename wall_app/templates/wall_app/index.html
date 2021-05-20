@@ -13,6 +13,9 @@
 {% block content %}        
 {% load tz %}
 {% timezone "America/Santiago" %}
+        <a class="go-back" href="{% url 'wall' %}">Wall</a>
+        <a class="go-back" href="{% url 'shows' %}">Shows</a>
+
         <div class="tableFixHead table-wrapper">
 
             {% if request.session.logged_user %}
@@ -64,7 +67,7 @@
                                         <tr class="comment_th">
                                             <th scope="col">{{comment.user.first_name}} {{comment.user.last_name}} - {{comment.created_at}} - 
                                                 {% if comment.user.email == request.session.logged_user %}
-                                                    [ <a href="/wall/delete_comment/{{comment.id}}">Delete comment</a> ] - 
+                                                    [ <a href={% url 'delete_comment' id_comment=comment.id %}>Delete comment</a> ] - 
                                                     [ <a href="" onclick="deleteComment( {{ comment.id }} )">Delete comment (Ajax) </a> ] 
                                                 {% endif %}
                                             </th>

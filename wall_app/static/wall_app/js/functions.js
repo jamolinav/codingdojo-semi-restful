@@ -6,7 +6,7 @@ $(document).ready(function() {
     
     $("#email").focusout(checkEmail);
 
-    $('#dtBasicExample').DataTable({
+    $('#dtBasicExampl').DataTable({
         //"pagingType": "simple_numbers", // "simple" option for 'Previous' and 'Next' buttons only
         //"pagingType": "simple", // "simple" option for 'Previous' and 'Next' buttons only
         "language": {

@@ -8,7 +8,10 @@
     <h1 class="d-flex justify-content-center page-title">All Shows</h1>
 {% endblock %}
 
-{% block content %}        
+{% block content %}
+        <a class="go-back" href="{% url 'wall' %}">Wall</a>
+        <a class="go-back" href="{% url 'shows' %}">Shows</a>
+
         {% if messages %}
         <ul class="messages" id="messages">
             {% for message in messages %}
