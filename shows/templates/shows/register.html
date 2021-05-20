@@ -23,7 +23,7 @@
                     </div>
                 {% endif %}
                 <div class="container-form">
-                    <form id="formRegister" action="{% url 'register' %}" method="POST">
+                    <form class="formRegister" action="{% url 'register' %}" method="POST">
                         {% csrf_token %}
                         <div class="django-form-wrapper">
                             {{ user_form.as_p }}
@@ -32,7 +32,7 @@
                         </div>
                         
                     </form>
-                    <form id="formRegister" action="{% url 'login' %}" method="POST">
+                    <form class="formRegister" action="{% url 'login' %}" method="POST">
                         {% csrf_token %}
                         <div class="django-form-wrapper">
                             {{ user_login_form.as_p }}

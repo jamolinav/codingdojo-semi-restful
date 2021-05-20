@@ -17,17 +17,6 @@
         <a class="go-back" href="{% url 'shows' %}">Shows</a>
 
         <div class="tableFixHead table-wrapper">
-
-            {% if request.session.logged_user %}
-            <form action="{% url 'add_message' %}" id="formMessage" class="formRegister" style="display: grid;" method="POST">
-                {% csrf_token %}
-                <h4>Post a message</h4>
-                <textarea name="message" id="message" cols="100" rows="3"></textarea>
-                <br>
-                <button type="submit">Post a message</button>
-                <br>
-                <button type="button" onclick="addMessage()">Post a message (Ajax)</button>
-            </form>
             {% if messages %}
                 <br>
                 <div class="valid-messages">
@@ -38,7 +27,17 @@
                     </ul>
                 </div>
             {% endif %}
-            <hr>
+            {% if request.session.logged_user %}
+                <form action="{% url 'add_message' %}" id="formMessage" class="formRegister" style="display: grid;" method="POST">
+                    {% csrf_token %}
+                    <h4>Post a message</h4>
+                    <textarea name="message" id="message" cols="100" rows="3"></textarea>
+                    <br>
+                    <button type="submit">Post a message</button>
+                    <br>
+                    <button type="button" onclick="addMessage()">Post a message (Ajax)</button>
+                </form>
+                <hr>
             {% endif %}
 
             

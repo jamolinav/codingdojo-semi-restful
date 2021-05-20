@@ -185,7 +185,8 @@ def register(request):
             for key, value in errors.items():
                 messages.error(request, value)
             context = {
-                'user_form' : UserForm(request.POST)
+                'user_form' : UserForm(request.POST),
+                'user_login_form' : UserLoginForm(),
             }
             return render(request, 'wall_app/register.html', context)
 
@@ -199,7 +200,14 @@ def register(request):
 
         user_form = UserForm(request.POST)
         if user_form.is_valid():
-            user_form.save()
+            user = user_form.save()
+            request.session['logged_user'] = user.email
+        else:
+            context = {
+                'user_form' : UserForm(request.POST),
+                'user_login_form' : UserLoginForm(),
+            }
+            return render(request, 'wall_app/register.html', context)
 
     return redirect('wall')
 

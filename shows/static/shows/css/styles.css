@@ -9,12 +9,21 @@ th     { background:#eee; }
 #dtBasicExample th{
     background: linear-gradient(#2196f387, #2196f338, #00bcd400);
     height: 8%;
-    text-align: -webkit-center;
+    text-align: left;
     font-style: italic;
     padding-top: 8px;
     color: steelblue;
     font-weight: bold;
 }
+
+.comment_th{
+    color: white;
+    font-size: 12px;
+}
+.comment_p{
+    font-size: 12px;
+}
+
 a{
     font-size: 12px;
     margin-left: 5px;
@@ -74,6 +83,12 @@ footer{
     overflow: hidden;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
+    width: -moz-available;
+    height: -moz-available;
+}
+
+.django-form-wrapper label{
+    width: 20%;
 }
 
 .windows-form{
@@ -91,10 +106,12 @@ footer{
     background: linear-gradient(#2196f387, #2196f338, #00bcd400);
     height: 8%;
     text-align: -webkit-center;
+    text-align: -moz-available;
     font-style: italic;
     padding-top: 8px;
     color: steelblue;
     font-weight: bold;
+    text-align: center;
 }
 
 .login-wind-body{
@@ -134,27 +151,30 @@ footer{
     margin: 5px 5px;
 }
 
-#formRegister{
+.formRegister{
     height: auto;
     width: -webkit-fill-available;
+    width: -moz-available;
 }
 
-#formRegister button{
-    width: 200px;
-    height: 20px;
-    width: 20%;
-    margin-left: 2%;
+.formRegister button{
+    height: auto;
+    width: 40%;
+    margin-left: 20%;
     border-radius: 5px;
     border-color: #b0c4de61;
     font-family: Tahoma;
     font-size: 11px;
     color: steelblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#formRegister input{
+.formRegister input{
     width: 200px;
     height: 20px;
-    width: auto;
+    width: 40%;
     margin-left: 2%;
     border-radius: 5px;
     border-color: #b0c4de61;
@@ -164,10 +184,11 @@ footer{
     padding: 0 20px
 }
 
-#formRegister label{
+.formRegister label{
     color: gray;
     font-size: 12px;
     font-weight: bold;
+    width: 40%;
 }
 
 .loginContainer{

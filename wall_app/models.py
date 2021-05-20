@@ -16,8 +16,29 @@ class UserManager(models.Manager):
         if len(errorsEmail) > 0:
             errors['email'] = errorsEmail
 
+        errorsPass = self.checkPassword(postData['password'])
+        if len(errorsPass) > 0:
+            errors['email'] = errorsPass
+        
+
         return errors
     
+    def checkPassword(self, password):
+        errors  = {}
+        regex = re.compile(r"""(?#!py password Rev:20160831_2100)
+                                    # Validate password: 2 upper, 1 special, 2 digit, 1 lower, 8 chars.
+                                ^                        # Anchor to start of string.
+                                (?=(?:[^A-Z]*[A-Z]){2})  # At least two uppercase.
+                                (?=[^!@#$&*]*[!@#$&*])   # At least one "special".
+                                (?=(?:[^0-9]*[0-9]){1})  # At least two digit.
+                                .{8,}                    # Password length is 8 or more.
+                                $                        # Anchor to end of string.
+                                """, re.VERBOSE)
+        EMAIL_REGEX = re.compile(r'^(?=(?:[^A-Z]*[A-Z]){2})(?=[^!@#$&*]*[!@#$&*])(?=(?:[^0-9]*[0-9]){1}).{8,}$')
+        if not EMAIL_REGEX.match(password):
+            errors['password'] = 'Password inválido, Minimo 8 caracteres, Al menos una letra mayúscula y una letra minucula, Al menos un dígito, Al menos 1 caracter especial'
+        return errors
+
     def checkEmail(self, email):
         errors  = {}
         EMAIL_REGEX = re.compile(r'^[A-Za-z0-9.+_-]+@[A-Za-z0-9.+_-]+\.[A-Za-z]+$')
@@ -29,6 +50,7 @@ class User(models.Model):
     first_name      = models.CharField(max_length=45)
     last_name       = models.CharField(max_length=45)
     email           = models.CharField(max_length=100)
+    birth_date      = models.DateField()
     password        = models.CharField(max_length=254)
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now=True)
